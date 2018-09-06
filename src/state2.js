@@ -1,11 +1,9 @@
-// a state is like a scene
-
-demo.state1 = function(){};
-demo.state1.prototype = {
+demo.state2 = function(){};
+demo.state2.prototype = {
     preload: function(){},
     create: function(){
         addChangeStateEventListener();
-        console.log('state1');
+        console.log('state2');
     },
     update: function(){},
 };

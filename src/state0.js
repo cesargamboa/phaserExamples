@@ -2,6 +2,7 @@ var demo = {};
 var centerX = 1400/2;
 var centerY =1000/2;
 var franco;
+var ninjaSong;
 const characterSpeed = 3.5;
 demo.state0 = function(){};
 demo.state0.prototype = {
@@ -11,8 +12,11 @@ demo.state0.prototype = {
         //add widht and heig of the sprites
         game.load.spritesheet('franco', 'src/Assets/Sprites/Sprites/SpriteSheet.png', 150, 150);
         // game.load.spritesheet('francoStanding', 'src/Assets/Sprites/S/StandingSprite.png', 413, 438);
+        game.load.audio('ninjaSong', ['src/Assets/Sound/the_japanese_ninja.mp3'])
     },
     create: function(){
+        music = game.add.audio('ninjaSong');
+        music.play();
         //initialize physics
         //to be able to manipulate the image, we need to create a var
         franco = game.add.sprite(0, 0, 'bg');
@@ -78,6 +82,9 @@ demo.state0.prototype = {
             }
             franco.animations.play('walk', 14, true);
         }   
+        if(game.input.keyboard.justPressed(Phaser.Keyboard.K)){
+            franco.animations.play('atack', 1, false);
+        }
     },
 };
 const changeState= (i, stateNum) => {

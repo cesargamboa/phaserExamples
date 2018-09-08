@@ -24,15 +24,15 @@ demo.state0.prototype = {
         franco.animations.add('climb', [7,8,9,10,11,12,13,14,15,16]);
         franco.animations.add('fall', [17,18,19,20,21,22,23,24,25,26]);
         franco.animations.add('parachute', [27,28,29,30,31,32,33,34,35,36]);
-        franco.animations.add('standing', [37,38,39,40,41,42,43,44,45,46]);
+        franco.animations.add('standing', [37,38,39,40,41,42,43,44,45,46]); //this one is good
         franco.animations.add('jump', [47,48,49,50,51,52,53,54,55,56]);
         franco.animations.add('atackSword', [57,58,59,60,61,62,63,64,65,66]);
-        franco.animations.add('atackKunai', [77,78,79,70,71,72,73,74,75,76]);
-        franco.animations.add('walk', [77,78,79,80,81,82,83,84,85,86]);
+        franco.animations.add('atackKunai', [67, 68,69,70,71,72,73,74,75,76]);
+        franco.animations.add('walk', [77,78,79,80,81,82,83,84,85,86]); //this one is good
         //CHANGE FRANCO SIZE
         // (width, height)
 
-        franco.scale.setTo(1, 1);
+        franco.scale.setTo(1.3, 1.3);
         //set bounds of the game
         game.world.setBounds(0, 0, 1920, 1080); 
         //taking user input
@@ -41,7 +41,7 @@ demo.state0.prototype = {
         addChangeStateEventListener();
         //scale the game for all screen sizes
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        //make the camara follow the player
+        //make the camara follow the playerw
         game.camera.follow(franco);
         //set dead some, meaning, where should the camera starts following player
         game.camera.deadzone =  new Phaser.Rectangle(centerX-300, 0, 600, 1080);
@@ -51,18 +51,18 @@ demo.state0.prototype = {
     update: function(){
         if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             franco.x += characterSpeed;
-            franco.scale.setTo(1, 1);
+            franco.scale.setTo(1.3, 1.3);
             //second par is frames 1-60, 3rd par is the loop
             franco.animations.play('walk', 19, true);
         }
         else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             franco.x -= characterSpeed;
-            franco.scale.setTo(-1, 1);
-            franco.animations.play('walk', 20, true);
+            franco.scale.setTo(-1.3, 1.3);
+            franco.animations.play('walk', 17, true);
         }
         else {
             franco.animations.stop('walk');
-            franco.animations.play('standing', 20, true);
+            franco.animations.play('standing', 15, true);
         }
         if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
             franco.y += characterSpeed;
@@ -71,13 +71,13 @@ demo.state0.prototype = {
             }
             franco.animations.play('walk', 14, true);
         }
-        if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
             franco.y -= characterSpeed;
             if(franco.y<803){
                 franco.y = 800;
             }
             franco.animations.play('walk', 14, true);
-        }
+        }   
     },
 };
 const changeState= (i, stateNum) => {

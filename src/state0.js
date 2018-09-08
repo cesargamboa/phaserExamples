@@ -9,17 +9,18 @@ demo.state0.prototype = {
         // game.load.image('franco', 'src/Assets/Franco/franco1.png');
         game.load.image('bg', 'src/Assets/BackGround/evening.png');
         //add widht and heig of the sprites
-        game.load.spritesheet('franco', 'src/Assets/Sprites/walkSprite.png', 500, 500);
+        game.load.spritesheet('franco', 'src/Assets/Sprites/Run/RunSprite.png', 413, 438);
+        // game.load.spritesheet('francoStanding', 'src/Assets/Sprites/Standing/StandingSprite.png', 413, 438);
     },
     create: function(){
         //initialize physics
         //to be able to manipulate the image, we need to create a var
         franco = game.add.sprite(0, 0, 'bg');
-        franco = game.add.sprite(centerX, 920, 'franco');
+        franco = game.add.sprite(centerX, centerY+300, 'franco');
         franco.anchor.x = 0.5;
         franco.anchor.y =0.5;
         //add animation to franco
-        franco.animations.add('walk', [0,1,2]);
+        franco.animations.add('walk', [0,1,2,3,4,5,6,7,8,9]);
         //CHANGE FRANCO SIZE
         // (width, height)
 
@@ -44,14 +45,17 @@ demo.state0.prototype = {
             franco.x += characterSpeed;
             franco.scale.setTo(0.4, 0.4);
             //second par is frames 1-60, 3rd par is the loop
-            franco.animations.play('walk', 14, true);
+            franco.animations.play('walk', 19, true);
         }
-        if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
-            franco.y -= characterSpeed;
-            if(franco.y<803){
-                franco.y = 800;
-            }
-            franco.animations.play('walk', 14, true);
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+            franco.x -= characterSpeed;
+            franco.scale.setTo(-0.4, 0.4);
+            franco.animations.play('walk', 20, true);
+        }
+        else {
+            franco.animations.stop('walk');
+            franco.animations.play('francoStanding', 20, true);
+            franco.frame = 1;
         }
         if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
             franco.y += characterSpeed;
@@ -60,13 +64,12 @@ demo.state0.prototype = {
             }
             franco.animations.play('walk', 14, true);
         }
-        if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
-            franco.x -= characterSpeed;
-            franco.scale.setTo(-0.4, 0.4);
+        if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+            franco.y -= characterSpeed;
+            if(franco.y<803){
+                franco.y = 800;
+            }
             franco.animations.play('walk', 14, true);
-        }
-        else if(!game.input.keyboard.isDown){
-            franco.animations.stop('walk');
         }
     },
 };

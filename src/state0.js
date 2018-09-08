@@ -9,8 +9,8 @@ demo.state0.prototype = {
         // game.load.image('franco', 'src/Assets/Franco/franco1.png');
         game.load.image('bg', 'src/Assets/BackGround/evening.png');
         //add widht and heig of the sprites
-        game.load.spritesheet('franco', 'src/Assets/Sprites/Run/RunSprite.png', 413, 438);
-        // game.load.spritesheet('francoStanding', 'src/Assets/Sprites/Standing/StandingSprite.png', 413, 438);
+        game.load.spritesheet('franco', 'src/Assets/Sprites/Sprites/SpriteSheet.png', 150, 150);
+        // game.load.spritesheet('francoStanding', 'src/Assets/Sprites/S/StandingSprite.png', 413, 438);
     },
     create: function(){
         //initialize physics
@@ -20,11 +20,19 @@ demo.state0.prototype = {
         franco.anchor.x = 0.5;
         franco.anchor.y =0.5;
         //add animation to franco
-        franco.animations.add('walk', [0,1,2,3,4,5,6,7,8,9]);
+        franco.animations.add('atack', [0,1,2,3,4,5,6]);
+        franco.animations.add('climb', [7,8,9,10,11,12,13,14,15,16]);
+        franco.animations.add('fall', [17,18,19,20,21,22,23,24,25,26]);
+        franco.animations.add('parachute', [27,28,29,30,31,32,33,34,35,36]);
+        franco.animations.add('standing', [37,38,39,40,41,42,43,44,45,46]);
+        franco.animations.add('jump', [47,48,49,50,51,52,53,54,55,56]);
+        franco.animations.add('atackSword', [57,58,59,60,61,62,63,64,65,66]);
+        franco.animations.add('atackKunai', [77,78,79,70,71,72,73,74,75,76]);
+        franco.animations.add('walk', [77,78,79,80,81,82,83,84,85,86]);
         //CHANGE FRANCO SIZE
         // (width, height)
 
-        franco.scale.setTo(0.4, 0.4);
+        franco.scale.setTo(1, 1);
         //set bounds of the game
         game.world.setBounds(0, 0, 1920, 1080); 
         //taking user input
@@ -43,19 +51,18 @@ demo.state0.prototype = {
     update: function(){
         if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             franco.x += characterSpeed;
-            franco.scale.setTo(0.4, 0.4);
+            franco.scale.setTo(1, 1);
             //second par is frames 1-60, 3rd par is the loop
             franco.animations.play('walk', 19, true);
         }
         else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             franco.x -= characterSpeed;
-            franco.scale.setTo(-0.4, 0.4);
+            franco.scale.setTo(-1, 1);
             franco.animations.play('walk', 20, true);
         }
         else {
             franco.animations.stop('walk');
-            franco.animations.play('francoStanding', 20, true);
-            franco.frame = 1;
+            franco.animations.play('standing', 20, true);
         }
         if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
             franco.y += characterSpeed;
